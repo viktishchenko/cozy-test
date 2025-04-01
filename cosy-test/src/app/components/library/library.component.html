@@ -1,0 +1,57 @@
+<div class="container">
+  <!-- Лоадер -->
+  <div *ngIf="isLoading" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <!-- Загрузка фото -->
+  <img
+    class="header-image img-fluid"
+    [src]="imageUrl"
+    (load)="onLoad()"
+    (error)="onError()"
+    [class.hidden]="isLoading"
+    alt="Night Sky"
+  />
+
+  <div class="input-group mw-50 mb-3 mt-3">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="searchTerm"
+      placeholder="Введите название"
+      aria-label="Введите название"
+      aria-describedby="button-addon2"
+    />
+    <button
+      class="btn btn-outline-secondary"
+      type="button"
+      id="button-addon2"
+      (click)="fetchLibraries()"
+    >
+      Найти
+    </button>
+  </div>
+
+  <!-- Таблица результатов -->
+  <table *ngIf="filteredLibraries?.length" class="library-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Название</th>
+        <th>Адрес</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lib of filteredLibraries; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td [innerHTML]="highlightSearchTerm(lib.name)"></td>
+        <td>{{ lib.address }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Сообщение если ничего не найдено -->
+  <p *ngIf="searchPerformed && filteredLibraries.length === 0">
+    Библиотек не найдено
+  </p>
+</div>
