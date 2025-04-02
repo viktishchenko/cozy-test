@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cosy-test": {
+    "cozy-test": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/cosy-test",
+            "outputPath": "dist/cozy-test",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "cosy-test:build:production"
+              "buildTarget": "cozy-test:build:production"
             },
             "development": {
-              "buildTarget": "cosy-test:build:development"
+              "buildTarget": "cozy-test:build:development"
             }
           },
           "defaultConfiguration": "development"

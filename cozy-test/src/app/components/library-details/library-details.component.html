@@ -1,0 +1,25 @@
+<div class="details-card" *ngIf="library">
+  <h2>Детали библиотеки</h2>
+  <div class="detail-row">
+    <span class="detail-label">Название:</span>
+    <span class="detail-value">{{ library.Cells.ShortName }}</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Вебсайт:</span>
+    <span class="detail-value">
+      <a
+        href="http://{{ library.Cells.WebSite }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ library.Cells.WebSite }}
+      </a>
+    </span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Телефон:</span>
+    <span class="detail-value">{{
+      library.Cells?.PublicPhone[0].PublicPhone
+    }}</span>
+  </div>
+</div>

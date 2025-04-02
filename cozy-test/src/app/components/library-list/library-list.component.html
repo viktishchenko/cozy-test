@@ -1,0 +1,59 @@
+<div class="container">
+  <div *ngIf="loadImg" class="spinner">Загружаем фото...</div>
+  <img
+    [src]="imageUrl"
+    (load)="onLoad()"
+    (error)="onError()"
+    [class.hidden]="loadImg"
+    [src]="imageUrl"
+    alt="Milky Way"
+    [ngStyle]="{
+      'object-fit': imageUrl.startsWith('./tmp') ? 'contain' : 'cover'
+    }"
+    class="header-image"
+  />
+  <div class="search-container">
+    <input
+      appCyrillicInput
+      [(ngModel)]="searchTerm"
+      placeholder="Название библиотеки, только кириллица"
+      class="search-input"
+    />
+    <button
+      (click)="searchLibraries()"
+      [disabled]="!searchTerm.trim() || isLoading"
+      class="search-button"
+    >
+      {{ isLoading ? "Загрузка..." : "Найти библиотеку" }}
+    </button>
+  </div>
+
+  <div *ngIf="libraries?.length > 0" class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>№</th>
+          <th>Название</th>
+          <th>Адрес</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let lib of libraries; let i = index"
+          (click)="showLibraryDetails(lib)"
+          class="library-row"
+        >
+          <td>{{ i + 1 }}</td>
+          <td [innerHTML]="highlightSearchTerm(lib.Cells.FullName)">
+            {{ lib.Cells.FullName }}
+          </td>
+          <td>{{ lib.Cells.ObjectAddress[0].Address }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="selectedLibrary">
+    <app-library-details [library]="selectedLibrary"></app-library-details>
+  </div>
+</div>

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { LibraryComponent } from './components/library/library.component';
+import { LibraryListComponent } from './components/library-list/library-list.component';
+import { LibraryService } from './services/library.service';
 
 @Component({
   selector: 'app-root',
-  imports: [LibraryComponent],
+  imports: [LibraryListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
